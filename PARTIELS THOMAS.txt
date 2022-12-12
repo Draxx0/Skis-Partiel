@@ -1,0 +1,25 @@
+FAIRE DES COMMITS REGULIERS SUR REPO POUR PARTIELS
+
+COTE BACK GERER LES ERREURS AVEC TRY CATCH SUR LES CONTROLLERS
+
+INIT DB / INIT BACKEND / INIT FRONT ...
+
+
+SUJET : APP POUR LOUER DES SKIS
+
+One to many --> un client pour plusieurs Skis
+
+BDD :
+
+Un client peut avoir plusieurs skis
+
+Clients : 
+
+firstName : string
+lastName: string
+email: email
+skis: []
+
+Skis : 
+
+Clients : ezebx8387Bcn2
