@@ -1,9 +1,18 @@
+import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
+import MainLayout from "./app/layouts/MainLayout";
+import MainRouter from "./app/routers/MainRouter";
 
 function App() {
-  return <div className="App">
-    <h1 className="text-center text-blue-600 text-4xl">Skis APP</h1>
-  </div>;
+  const [posts, setPosts] = useState([]);
+  return (
+    <BrowserRouter>
+      <MainLayout>
+        <MainRouter posts={posts} setPosts={setPosts} />
+      </MainLayout>
+    </BrowserRouter>
+  );
 }
 
 export default App;
