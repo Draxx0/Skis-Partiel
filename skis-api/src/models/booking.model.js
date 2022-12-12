@@ -10,7 +10,7 @@ const bookingModel = new Schema({
     type: Date,
     default: Date.now(),
   },
-  posts: {
+  post: {
     type: Schema.Types.ObjectId,
     ref: "Post",
   },

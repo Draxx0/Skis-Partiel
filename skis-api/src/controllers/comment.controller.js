@@ -1,39 +1,39 @@
-const Booking = require("../models/booking.model");
+const Comment = require("../models/comment.model");
 const Post = require("../models/post.model");
 
-const BookingController = {
+const CommentController = {
   create: async (req, res) => {
     try {
       const data = req.body;
-      const booking = await Booking.create(data);
-      await booking.save();
+      const comment = await Comment.create(data);
+      await comment.save();
 
       const post = await Post.findById(req.body.post);
-      post.bookings.push(booking);
+      post.comments.push(comment);
       await post.save();
 
-      res.send(booking);
+      res.send(comment);
     } catch (error) {
       res.status(400).send({ message: error.message });
     }
   },
   delete: async (req, res) => {
     try {
-      const deleteBooking = await Booking.findByIdAndDelete(req.params.id);
-      res.send(deleteBooking);
+      const deleteComment = await Comment.findByIdAndDelete(req.params.id);
+      res.send(deleteComment);
     } catch (error) {
       res.status(400).send({ message: error.message });
     }
   },
-  getAllBookingByPost: async (req, res) => {
+  getAllByPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      const bookings = await Booking.find({ post: post._id });
-      res.send(bookings);
+      const comments = await Comment.find({ post: post._id });
+      res.send(comments);
     } catch (error) {
       res.status(404).send({ message: error.message });
     }
   },
 };
 
-module.exports = BookingController;
+module.exports = CommentController;
