@@ -50,6 +50,10 @@ const postSchema = new Schema({
       ref: "Booking",
     },
   ],
+  shop: {
+    type: Schema.Types.ObjectId,
+    ref: "Shop",
+  },
   isAvailable: {
     type: Boolean,
     default: true,

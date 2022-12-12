@@ -6,6 +6,7 @@ const port = process.env.PORT || 8000;
 const postRouter = require("./src/routers/post.router");
 const bookingRouter = require("./src/routers/booking.router");
 const commentRouter = require("./src/routers/comment.router");
+const shopRouter = require("./src/routers/shop.router");
 const connect = require("./config/mongoose.config");
 
 connect();
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/api", postRouter);
 app.use("/api", bookingRouter);
 app.use("/api", commentRouter);
+app.use("/api", shopRouter);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

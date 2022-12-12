@@ -1,6 +1,6 @@
 ### Partiel Backend Plateforme de réservations de skis.
 
-Stacks & Tools utilisées : 
+#### Stacks & Tools utilisées : 
 - Node JS
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 - Express
@@ -18,8 +18,11 @@ Stacks & Tools utilisées :
 - Nodemon
 ![Nodemon](https://img.shields.io/badge/nodemon-%230db7ed.svg?style=for-the-badge&logo=nodemon&logoColor=white)
 
+#### DbDiagram 
+https://dbdiagram.io/d/63978d9499cb1f3b55a0e9ab
 
-Installations & lancement du projet
+
+#### Installations & lancement du projet
 
 ```bash
 npm install

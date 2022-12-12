@@ -1,4 +1,5 @@
 const Booking = require("../models/booking.model");
+const Shop = require("../models/shop.model");
 const Post = require("../models/post.model");
 
 const BookingController = {
@@ -14,6 +15,10 @@ const BookingController = {
         post.isAvailable = false;
       }
       await post.save();
+
+      const shop = await Shop.findById(req.body.shop);
+      shop.bookings.push(booking);
+      await shop.save();
 
       res.send(booking);
     } catch (error) {

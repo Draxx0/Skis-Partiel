@@ -7,10 +7,11 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [shops, setShops] = useState([]);
   return (
     <BrowserRouter>
       <MainLayout>
-        <MainRouter posts={posts} setPosts={setPosts} />
+        <MainRouter posts={posts} setPosts={setPosts} shops={shops} setShops={setShops} />
       </MainLayout>
     </BrowserRouter>
   );
