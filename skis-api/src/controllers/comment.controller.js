@@ -8,6 +8,8 @@ const CommentController = {
       const comment = await Comment.create(data);
       await comment.save();
 
+      console.log(req.body);
+
       const post = await Post.findById(req.body.post);
       post.comments.push(comment);
       await post.save();

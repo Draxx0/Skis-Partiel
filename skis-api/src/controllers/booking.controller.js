@@ -10,6 +10,9 @@ const BookingController = {
 
       const post = await Post.findById(req.body.post);
       post.bookings.push(booking);
+      if (post.bookings.length > 0) {
+        post.isAvailable = false;
+      }
       await post.save();
 
       res.send(booking);

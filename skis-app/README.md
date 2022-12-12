@@ -1,6 +1,6 @@
 ### Partiel Frontend Plateforme de réservations de skis.
 
-Stacks utilisées : 
+Stacks & Tools utilisées : 
 - React
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 - TailwindCSS

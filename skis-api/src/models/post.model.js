@@ -18,11 +18,19 @@ const postSchema = new Schema({
     type: Number,
     required: true,
   },
+  style: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
   },
   description: {
+    type: String,
+    required: true,
+  },
+  address: {
     type: String,
     required: true,
   },
