@@ -130,10 +130,11 @@ const PostDetails = ({ posts }) => {
           />
         </form>
 
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 border-2 border-gray-300 rounded p-4">
+          <h2 className="text-2xl font-bold">Commentaires</h2>
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <div key={comment._id} className="">
+              <div key={comment._id} className="relative before:absolute before:content-[''] before:left-0 before:-bottom-2 before:bg-indigo-500 before:block before:h-0.5 before:w-full before:rounded">
                 <div className="flex flex-col gap-1">
                   <div className="flex justify-between items-center">
                     <h2 className="text-xl font-bold">{comment.username}</h2>
@@ -159,7 +160,7 @@ const PostDetails = ({ posts }) => {
           <img
             src={currentPost.imgUrl}
             alt="skis"
-            className="h-96 object-cover"
+            className="h-96 object-cover border-2 border-indigo-500 rounded hover:brightness-90 transition-all duration-500"
           />
           <span className="text-xl font-bold">
             {comments.length > 0
@@ -173,28 +174,33 @@ const PostDetails = ({ posts }) => {
             </h2>
 
             <p className="text-lg">{currentPost.description}</p>
+
+            <p className="text-lg">{currentPost.address}</p>
           </div>
 
-          <form
-            className="flex items-center gap-6 w-full"
-            onSubmit={(e) => handleSendBooking(e)}
-          >
-            <input
-              type="tel"
-              name="telephoneNumber"
-              id="telephoneNumber"
-              className="px-4 py-2 w-2/4"
-              placeholder="Entrez votre numéro de téléphone"
-              pattern="[0-9]{10}"
-              maxLength="10"
-              onChange={(e) => handleGetTelData(e)}
-            />
-            <input
-              type="submit"
-              value="Réserver"
-              className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
-            />
-          </form>
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-bold">Réservation</h2>
+            <form
+              className="flex items-center gap-6 w-full"
+              onSubmit={(e) => handleSendBooking(e)}
+            >
+              <input
+                type="tel"
+                name="telephoneNumber"
+                id="telephoneNumber"
+                className="px-4 py-2 w-2/4"
+                placeholder="Entrez votre numéro de téléphone"
+                pattern="[0-9]{10}"
+                maxLength="10"
+                onChange={(e) => handleGetTelData(e)}
+              />
+              <input
+                type="submit"
+                value="Réserver"
+                className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
+              />
+            </form>
+          </div>
         </div>
       </div>
       <ToastContainer />

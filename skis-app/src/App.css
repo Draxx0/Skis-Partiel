@@ -37,9 +37,10 @@ input,
 select,
 textarea {
   outline: none;
-  border: 2px solid #ccc;
+  border: 2px solid rgb(79 70 229);
   border-radius: 5px;
   appearance: none;
+  transition: 0.3s ease-in-out all;
 }
 
 input::placeholder,
@@ -51,4 +52,9 @@ input:focus::placeholder,
 textarea:focus::placeholder {
   color: transparent;
   transform: translateY(-5px);
+}
+
+input:focus,
+textarea:focus {
+  border: 2px solid rgb(55 48 163);
 }

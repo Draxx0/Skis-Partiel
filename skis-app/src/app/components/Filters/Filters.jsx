@@ -29,9 +29,11 @@ const Filters = ({ posts, setFilterPosts }) => {
         (post) => post.weight >= 45 && post.weight <= 65
       );
       setFilterPosts(filteredPosts);
-    } else {
+    } else if (weight === "+65") {
       const filteredPosts = posts.filter((post) => post.weight > 65);
       setFilterPosts(filteredPosts);
+    } else {
+      setFilterPosts(posts);
     }
   };
 

@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       animation: {
         "spin-slow": "spin 12s linear infinite",
+        "bounce-forward": "bounce 1s ease-in-out",
       },
     },
   },

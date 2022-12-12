@@ -4,7 +4,7 @@ const Post = ({ post }) => {
   const navigate = useNavigate();
   return (
     <div
-      className="bg-white shadow-md rounded-md p-4 transition ease-in-out duration-700 cursor-pointer hover:-translate-y-1"
+      className="bg-white shadow-md border-gray-700 border-transparent border-2 rounded-md p-4 transition ease-in-out duration-700 cursor-pointer border-1 hover:-translate-y-1 hover:border-indigo-500"
       onClick={() => navigate(`/post/${post._id}`)}
     >
       <div className="flex gap-8">
@@ -17,15 +17,17 @@ const Post = ({ post }) => {
 
           <p className="text-gray-500 text-xl">{post.description}</p>
 
-          <span className="text-lg">
+          <p className="text-xl">{post.address}</p>
+
+          <p className="text-lg">
             {" "}
             Style : <span className="font-medium">{post.style}</span>{" "}
-          </span>
+          </p>
 
-          <span className="text-lg">
+          <p className="text-lg">
             {" "}
             Poids : <span className="font-medium">{post.weight}kg</span>{" "}
-          </span>
+          </p>
         </div>
       </div>
     </div>
