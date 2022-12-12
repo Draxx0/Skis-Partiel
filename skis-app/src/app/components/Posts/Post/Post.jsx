@@ -10,12 +10,22 @@ const Post = ({ post }) => {
       <div className="flex gap-8">
         <img src={post.imgUrl} alt="Skis" className="h-64 object-cover w-2/5" />
 
-        <div className="flex flex-col gap-1 w-3/5">
+        <div className="flex flex-col gap-1 w-3/5 justify-between">
           <h2 className="text-3xl font-bold uppercase">
             {post.title} {post.price}€ / j - {post.size}cm
           </h2>
 
           <p className="text-gray-500 text-xl">{post.description}</p>
+
+          <span className="text-lg">
+            {" "}
+            Style : <span className="font-medium">{post.style}</span>{" "}
+          </span>
+
+          <span className="text-lg">
+            {" "}
+            Poids : <span className="font-medium">{post.weight}kg</span>{" "}
+          </span>
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@ const Home = ({ posts, setPosts }) => {
   return (
     <div id="home" className="flex flex-col gap-10">
       <Filters posts={posts} setFilterPosts={setFilterPosts} />
+      <h1 className="text-4xl font-bold">Skis en location</h1>
       <PostsList filterPosts={filterPosts} />
     </div>
   );

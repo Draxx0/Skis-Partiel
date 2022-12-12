@@ -7,7 +7,7 @@ const findById = async (id) => {
   return reponse.data;
 };
 
-const create = async (credentials) => {
+const createByPostId = async (credentials) => {
   const response = await instance.post(END_POINT, credentials);
   return response.data;
 };
@@ -18,7 +18,7 @@ const remove = async (id) => {
 
 const bookingService = {
   findById,
-  create,
+  createByPostId,
   remove,
 };
 

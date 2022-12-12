@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import commentService from "../../../setup/services/comment.services.js";
+import bookingService from "../../../setup/services/booking.services.js";
 
 const PostDetails = ({ posts }) => {
   const [currentPost, setCurrentPost] = useState({});
   const [comments, setComments] = useState([]);
   const [commentData, setCommentData] = useState({});
+  const [telData, setTelData] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fetchCommentsByPost = async () => {
     try {
@@ -28,20 +32,49 @@ const PostDetails = ({ posts }) => {
   const handleGetComData = (e) => {
     const { name, value } = e.target;
     setCommentData({ ...commentData, [name]: value });
-    console.log(commentData);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSendComment = async (e) => {
     e.preventDefault();
     try {
       commentData.stars = parseInt(commentData.stars);
       commentData.post = currentPost._id;
       await commentService.createByPostId(commentData);
+      toast.success("Votre commentaire a été créé");
       fetchCommentsByPost();
     } catch (error) {
+      toast.error("Une erreur est survenue");
       console.log(error);
     }
   };
+
+  const handleGetTelData = (e) => {
+    const { name, value } = e.target;
+    setTelData({ [name]: value });
+  };
+
+  const handleSendBooking = async (e) => {
+    e.preventDefault();
+    if (currentPost.isAvailable === true) {
+      try {
+        telData.post = currentPost._id;
+        await bookingService.createByPostId(telData);
+        toast.success(
+          "Votre réservation a bien été prise en compte vous allez être redirigé vers la page d'accueil"
+        );
+        setTimeout(() => {
+          navigate(-1);
+        }, 3000);
+      } catch (error) {
+        toast.error("Une erreur est survenue");
+        console.log(error);
+      }
+    } else {
+      toast.error("Ce bien n'est plus disponible");
+    }
+  };
+
+  console.log(currentPost);
 
   useEffect(() => {
     setCurrentPost(posts.find((post) => post._id === id));
@@ -57,7 +90,10 @@ const PostDetails = ({ posts }) => {
           Retour
         </Link>
 
-        <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col gap-2">
+        <form
+          onSubmit={(e) => handleSendComment(e)}
+          className="flex flex-col gap-2"
+        >
           <input
             type="text"
             maxLength="1"
@@ -139,13 +175,19 @@ const PostDetails = ({ posts }) => {
             <p className="text-lg">{currentPost.description}</p>
           </div>
 
-          <form className="flex items-center gap-6 w-full">
+          <form
+            className="flex items-center gap-6 w-full"
+            onSubmit={(e) => handleSendBooking(e)}
+          >
             <input
               type="tel"
               name="telephoneNumber"
               id="telephoneNumber"
               className="px-4 py-2 w-2/4"
               placeholder="Entrez votre numéro de téléphone"
+              pattern="[0-9]{10}"
+              maxLength="10"
+              onChange={(e) => handleGetTelData(e)}
             />
             <input
               type="submit"
@@ -155,6 +197,7 @@ const PostDetails = ({ posts }) => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
