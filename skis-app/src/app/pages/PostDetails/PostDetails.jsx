@@ -4,8 +4,9 @@ import { toast, ToastContainer } from "react-toastify";
 import commentService from "../../../setup/services/comment.services.js";
 import bookingService from "../../../setup/services/booking.services.js";
 
-const PostDetails = ({ posts }) => {
+const PostDetails = ({ posts, shops }) => {
   const [currentPost, setCurrentPost] = useState({});
+  const [currentShop, setCurrentShop] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentData, setCommentData] = useState({});
   const [telData, setTelData] = useState({});
@@ -75,12 +76,19 @@ const PostDetails = ({ posts }) => {
     }
   };
 
-  console.log(currentPost);
+  const getCurrentPost = async () => {
+    const currentPost = await posts.find((post) => post._id === id);
+    setCurrentPost(currentPost);
+    const currentShop = await shops.find(
+      (shop) => shop._id === currentPost.shop
+    );
+    setCurrentShop(currentShop);
+  };
 
   useEffect(() => {
-    setCurrentPost(posts.find((post) => post._id === id));
+    getCurrentPost();
     fetchCommentsByPost();
-  }, [id, posts]);
+  }, [id, posts, shops]);
   return (
     <div className="flex justify-between gap-14">
       <div className="flex flex-col justify-between gap-4 w-1/3">
@@ -135,7 +143,10 @@ const PostDetails = ({ posts }) => {
           <h2 className="text-2xl font-bold">Commentaires</h2>
           {comments.length > 0 ? (
             comments.map((comment) => (
-              <div key={comment._id} className="relative before:absolute before:content-[''] before:left-0 before:-bottom-2 before:bg-indigo-500 before:block before:h-0.5 before:w-full before:rounded">
+              <div
+                key={comment._id}
+                className="relative before:absolute before:content-[''] before:left-0 before:-bottom-2 before:bg-indigo-500 before:block before:h-0.5 before:w-full before:rounded"
+              >
                 <div className="flex flex-col gap-1">
                   <div className="flex justify-between items-center">
                     <h2 className="text-xl font-bold">{comment.username}</h2>
@@ -177,6 +188,14 @@ const PostDetails = ({ posts }) => {
             <p className="text-lg">{currentPost.description}</p>
 
             <p className="text-lg">{currentPost.address}</p>
+
+            <p className="text-lg">
+              Louer par la boutique{" "}
+              <span className="font-bold text-indigo-500">
+                {" "}
+                {currentShop.name}{" "}
+              </span>
+            </p>
           </div>
 
           <div className="flex flex-col gap-2">

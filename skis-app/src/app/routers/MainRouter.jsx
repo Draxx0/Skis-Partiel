@@ -10,11 +10,11 @@ import ShopsList from "../pages/ShopsList/ShopsList";
 const MainRouter = ({posts, setPosts, shops, setShops, fetchPosts, fetchShops}) => {
   return (
     <Routes>
-      <Route path="/" element={<Home posts={posts} setPosts={setPosts}/>} />
-      <Route path="/post/:id" element={<PostDetails posts={posts}/>} />
+      <Route path="/" element={<Home posts={posts}/>} />
+      <Route path="/post/:id" element={<PostDetails posts={posts} shops={shops} />} />
       <Route path="/shops" element={<ShopsList shops={shops} setShops={setShops} />} />
       <Route path="/shops/:id" element={<ShopConnect shops={shops} setShops={setShops} />} />
-      <Route path="/shops/:id/dashboard" element={<ShopDashboard shops={shops} setShops={setShops} fetchPosts={fetchPosts} fetchShops={fetchShops} posts={posts} />} />
+      <Route path="/shops/:id/dashboard" element={<ShopDashboard shops={shops} setShops={setShops} fetchPosts={fetchPosts} fetchShops={fetchShops} />} />
       <Route path="/shops/:id/dashboard/post-form/create" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops} />} />
       <Route path="/shops/:id/dashboard/post-form/:postId" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops}/>} />
       <Route path="/shops/:id/dashboard/bookings" element={<ShopBookings shops={shops} />} />

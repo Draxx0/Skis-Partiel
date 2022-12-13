@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import postService from "../../../setup/services/post.services";
 
-const ShopDashboard = ({ shops, fetchPosts, posts, fetchShops }) => {
+const ShopDashboard = ({ shops, fetchPosts, fetchShops }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentShop, setCurrentShop] = useState({});
@@ -24,17 +24,17 @@ const ShopDashboard = ({ shops, fetchPosts, posts, fetchShops }) => {
     setCurrentShop(currentShop);
     fetchPosts();
     fetchShops();
-  }, [fetchShops, fetchPosts, shops, id]);
+  }, [fetchPosts, fetchShops, id, shops]);
 
   return (
     <div>
-      <Link
-        to={() => navigate(-1)}
-        className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-full"
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
       >
-        Retour
-      </Link>
-      <div className="flex justify-between items-center mb-4">
+        Déconnexion
+      </button>
+      <div className="flex justify-between items-center my-4">
         <div className="flex gap-2 items-center">
           <img src={currentShop?.logo} alt="logo shop" className="w-24" />
           <h1 className="text-3xl">
@@ -79,12 +79,6 @@ const ShopDashboard = ({ shops, fetchPosts, posts, fetchShops }) => {
 
                 <div className="flex justify-between items-center">
                   <p className="font-bold text-xl">{post.title}</p>
-                  {currentShop.bookings?.length > 0 &&
-                    currentShop.bookings?.map((booking) => (
-                      <p key={booking._id} className="font-bold text-xl">
-                        {booking.telephoneNumber}
-                      </p>
-                    ))}
                   <div className="flex gap-1">
                     <button
                       onClick={() =>

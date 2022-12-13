@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import MainLayout from "./app/layouts/MainLayout";
@@ -26,6 +26,10 @@ function App() {
       console.log(error);
     }
   };
+  useEffect(() => {
+    fetchPosts();
+    fetchShops();
+  }, []);
   return (
     <BrowserRouter>
       <MainLayout>

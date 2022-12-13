@@ -4,19 +4,30 @@ import Logo from "../../assets/images/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <nav className="w-full shadow-md p-3 flex justify-center bg-indigo-500">
-      <ul className="flex flex-col items-center">
+    <nav className="w-full shadow-md p-3 flex bg-zinc-800">
+      <ul className="flex items-center gap-4">
         <li>
           {" "}
           <img
             src={Logo}
-            className="h-16 w-16 animate-spin-slow cursor-pointer"
+            className="h-16 w-16 cursor-pointer"
             alt="Logo"
             onClick={() => navigate("/")}
           />{" "}
         </li>
         <li>
-          <Link to="/shops" className="text-white font-bold">
+          <Link
+            to="/"
+            className="text-white font-bold transition duration-750 ease-in-out hover:text-indigo-500"
+          >
+            Accueil
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/shops"
+            className="text-white font-bold transition duration-750 ease-in-out hover:text-indigo-500"
+          >
             Boutiques
           </Link>
         </li>

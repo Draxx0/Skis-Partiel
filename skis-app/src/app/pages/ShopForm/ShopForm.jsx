@@ -13,12 +13,6 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
   const [credentials, setCredentials] = useState({});
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (editMode) {
-      fetchPostsByShop();
-    }
-  }, []);
-
   const fetchPostsByShop = async () => {
     try {
       const post = await postService.findOneById(postId);
@@ -27,6 +21,12 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (editMode) {
+      fetchPostsByShop();
+    }
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -55,6 +55,12 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
   };
   return (
     <div className="flex flex-col gap-10">
+      <button
+        onClick={() => navigate(-1)}
+        className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
+      >
+        Retour
+      </button>
       <h1 className="text-center font-bold text-2xl">
         Formulaire de Création / Modification de Poste
       </h1>
@@ -108,8 +114,12 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               name="size"
               id="size"
               className="px-4 py-2"
+              defaultValue="default"
               onChange={handleChange}
             >
+              <option value="default" disabled>
+                Taille
+              </option>
               <option value="140">140</option>
               <option value="145">145</option>
               <option value="150">150</option>
@@ -130,8 +140,12 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               name="style"
               id="style"
               className="px-4 py-2"
+              defaultValue="default"
               onChange={handleChange}
             >
+              <option value="default" disabled>
+                Style
+              </option>
               <option value="Freeride">Freeride</option>
               <option value="Freestyle">Freestyle</option>
               <option value="Piste">Piste</option>
