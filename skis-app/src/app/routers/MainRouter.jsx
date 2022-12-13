@@ -7,17 +7,17 @@ import ShopDashboard from "../pages/ShopDashboard/ShopDashboard";
 import ShopForm from "../pages/ShopForm/ShopForm";
 import ShopsList from "../pages/ShopsList/ShopsList";
 
-const MainRouter = ({posts, setPosts, shops, setShops, fetchPosts, fetchShops}) => {
+const MainRouter = ({posts, shops, setShops, fetchPosts, fetchShops}) => {
   return (
     <Routes>
       <Route path="/" element={<Home posts={posts}/>} />
-      <Route path="/post/:id" element={<PostDetails posts={posts} shops={shops} />} />
+      <Route path="/post/:id" element={<PostDetails posts={posts} shops={shops} fetchPosts={fetchPosts} />} />
       <Route path="/shops" element={<ShopsList shops={shops} setShops={setShops} />} />
       <Route path="/shops/:id" element={<ShopConnect shops={shops} setShops={setShops} />} />
       <Route path="/shops/:id/dashboard" element={<ShopDashboard shops={shops} setShops={setShops} fetchPosts={fetchPosts} fetchShops={fetchShops} />} />
       <Route path="/shops/:id/dashboard/post-form/create" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops} />} />
       <Route path="/shops/:id/dashboard/post-form/:postId" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops}/>} />
-      <Route path="/shops/:id/dashboard/bookings" element={<ShopBookings shops={shops} />} />
+      <Route path="/shops/:id/dashboard/bookings" element={<ShopBookings shops={shops} posts={posts} />} />
     </Routes>
   );
 };

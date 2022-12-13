@@ -62,42 +62,49 @@ const ShopDashboard = ({ shops, fetchPosts, fetchShops }) => {
       </div>
 
       <div className="flex flex-col gap-7">
-        <p>Vous avez actuellement {currentShop.posts?.length} Poste(s).</p>
+        <p>
+          Vous avez actuellement {currentShop.posts?.length} Poste(s) dont{" "}
+          {currentShop.bookings?.length} reservé.
+        </p>
 
         <div className="grid grid-cols-2 gap-6">
           {currentShop.posts?.length > 0 ? (
-            currentShop.posts?.map((post) => (
-              <div
-                key={post._id}
-                className="flex flex-col gap-4 shadow-md border-gray-700 border-transparent border-2 rounded-md p-4 transition ease-in-out duration-700 border-1 hover:-translate-y-1 hover:border-indigo-500"
-              >
-                <img
-                  src={post.imgUrl}
-                  alt="post img"
-                  className="h-60 object-cover"
-                />
+            currentShop?.posts
+              .filter((post) => post.isAvailable)
+              .map((post) => (
+                <div
+                  key={post._id}
+                  className="flex flex-col gap-4 shadow-md border-gray-700 border-transparent border-2 rounded-md p-4 transition ease-in-out duration-700 border-1 hover:-translate-y-1 hover:border-indigo-500"
+                >
+                  <img
+                    src={post.imgUrl}
+                    alt="post img"
+                    className="h-60 object-cover"
+                  />
 
-                <div className="flex justify-between items-center">
-                  <p className="font-bold text-xl">{post.title}</p>
-                  <div className="flex gap-1">
-                    <button
-                      onClick={() =>
-                        navigate(`/shops/${id}/dashboard/post-form/${post._id}`)
-                      }
-                      className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
-                    >
-                      Modifier
-                    </button>
-                    <button
-                      className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
-                      onClick={() => handleDeletePost(post._id)}
-                    >
-                      Supprimer
-                    </button>
+                  <div className="flex justify-between items-center">
+                    <p className="font-bold text-xl">{post.title}</p>
+                    <div className="flex gap-1">
+                      <button
+                        onClick={() =>
+                          navigate(
+                            `/shops/${id}/dashboard/post-form/${post._id}`
+                          )
+                        }
+                        className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
+                      >
+                        Modifier
+                      </button>
+                      <button
+                        className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
+                        onClick={() => handleDeletePost(post._id)}
+                      >
+                        Supprimer
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ))
           ) : (
             <p>Vous n'avez pas encore de postes sur le marché</p>
           )}

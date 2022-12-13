@@ -4,7 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import commentService from "../../../setup/services/comment.services.js";
 import bookingService from "../../../setup/services/booking.services.js";
 
-const PostDetails = ({ posts, shops }) => {
+const PostDetails = ({ posts, shops, fetchPosts }) => {
   const [currentPost, setCurrentPost] = useState({});
   const [currentShop, setCurrentShop] = useState([]);
   const [comments, setComments] = useState([]);
@@ -41,6 +41,12 @@ const PostDetails = ({ posts, shops }) => {
       commentData.stars = parseInt(commentData.stars);
       commentData.post = currentPost._id;
       await commentService.createByPostId(commentData);
+      setCommentData({
+        stars: "",
+        username: "",
+        description: "",
+      });
+      console.log(commentData);
       toast.success("Votre commentaire a été créé");
       fetchCommentsByPost();
     } catch (error) {
@@ -61,6 +67,10 @@ const PostDetails = ({ posts, shops }) => {
         telData.post = currentPost._id;
         telData.shop = currentPost.shop;
         await bookingService.createByPostId(telData);
+        fetchPosts();
+        setTelData({
+          telephoneNumber: "",
+        });
         toast.success(
           "Votre réservation a bien été prise en compte vous allez être redirigé vers la page d'accueil"
         );
@@ -112,6 +122,7 @@ const PostDetails = ({ posts, shops }) => {
             id="stars"
             className="px-4 py-2"
             placeholder="Votre Note entre 0 et 5"
+            value={commentData.stars}
             onChange={(e) => handleGetComData(e)}
           />
           <input
@@ -120,6 +131,7 @@ const PostDetails = ({ posts, shops }) => {
             id="username"
             className="px-4 py-2"
             placeholder="Votre nom"
+            value={commentData.username}
             required
             onChange={(e) => handleGetComData(e)}
           />
@@ -129,6 +141,7 @@ const PostDetails = ({ posts, shops }) => {
             rows="10"
             className="resize-none px-4 py-2"
             placeholder="Commentaire"
+            value={commentData.description}
             required
             onChange={(e) => handleGetComData(e)}
           ></textarea>
@@ -212,6 +225,7 @@ const PostDetails = ({ posts, shops }) => {
                 placeholder="Entrez votre numéro de téléphone"
                 pattern="[0-9]{10}"
                 maxLength="10"
+                value={telData.telephoneNumber}
                 onChange={(e) => handleGetTelData(e)}
               />
               <input
