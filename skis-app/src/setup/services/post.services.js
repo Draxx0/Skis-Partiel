@@ -25,7 +25,7 @@ const update = async (credentials) => {
   return response.data;
 };
 
-const remove = async (id) => {
+const deleteOne = async (id) => {
   return await instance.delete(`${END_POINT}/${id}`);
 };
 
@@ -34,7 +34,7 @@ const postService = {
   findOneById,
   create,
   update,
-  remove,
+  deleteOne,
 };
 
 export default postService;

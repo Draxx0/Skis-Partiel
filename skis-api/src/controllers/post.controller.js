@@ -1,5 +1,6 @@
 const Post = require("../models/post.model");
 const Shop = require("../models/shop.model");
+const Booking = require("../models/booking.model");
 
 const PostController = {
   create: async (req, res) => {
@@ -30,7 +31,16 @@ const PostController = {
   delete: async (req, res) => {
     try {
       const deletePost = await Post.findByIdAndDelete(req.params.id);
-      res.send(deletePost);
+      const deleteBooking = await Booking.findByIdAndDelete(
+        deletePost.bookings
+      );
+
+      const shop = await Shop.findById(deletePost.shop);
+      shop.posts.pull(deletePost);
+      shop.bookings.pull(deleteBooking);
+      await shop.save();
+
+      res.send(shop);
     } catch (error) {
       res.status(400).send({ message: error.message });
     }

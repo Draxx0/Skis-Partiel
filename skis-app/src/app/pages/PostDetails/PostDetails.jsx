@@ -58,6 +58,7 @@ const PostDetails = ({ posts }) => {
     if (currentPost.isAvailable === true) {
       try {
         telData.post = currentPost._id;
+        telData.shop = currentPost.shop;
         await bookingService.createByPostId(telData);
         toast.success(
           "Votre réservation a bien été prise en compte vous allez être redirigé vers la page d'accueil"

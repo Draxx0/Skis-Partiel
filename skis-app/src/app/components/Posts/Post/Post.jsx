@@ -8,7 +8,7 @@ const Post = ({ post }) => {
       onClick={() => navigate(`/post/${post._id}`)}
     >
       <div className="flex gap-8">
-        <img src={post.imgUrl} alt="Skis" className="h-64 object-cover w-2/5" />
+        <img src={post.imgUrl} alt="Skis" className="h-96 object-cover w-2/5" />
 
         <div className="flex flex-col gap-1 w-3/5 justify-between">
           <h2 className="text-3xl font-bold uppercase">
