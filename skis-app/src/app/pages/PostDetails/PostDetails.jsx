@@ -10,8 +10,6 @@ const PostDetails = ({
   posts,
   shops,
   fetchPosts,
-  favoritesPost,
-  setFavoritesPost,
   storageItem,
   setStorageItem
 }) => {

@@ -1,20 +1,9 @@
 import { useEffect, useState } from "react";
-import postService from "../../../setup/services/post.services";
 import Filters from "../../components/Filters/Filters";
 import PostsList from "../../components/Posts/PostsList";
 
 const Home = ({ posts }) => {
   const [filterPosts, setFilterPosts] = useState([]);
-
-  // const fetchPosts = async () => {
-  //   try {
-  //     const posts = await postService.findAll();
-  //     setPosts(posts);
-  //     setFilterPosts(posts);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   useEffect(() => {
     setFilterPosts(posts);

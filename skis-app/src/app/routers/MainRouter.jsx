@@ -15,12 +15,12 @@ const MainRouter = ({posts, shops, setShops, fetchPosts, fetchShops, storageItem
       <Route path="/" element={<Home posts={posts}/>} />
       <Route path="/post/:id" element={<PostDetails posts={posts} shops={shops} fetchPosts={fetchPosts} storageItem={storageItem} setStorageItem={setStorageItem} />} />
       <Route path="/shops" element={<ShopsList shops={shops} setShops={setShops} />} />
-      <Route path="/shops/:id" element={<ShopConnect shops={shops} setShops={setShops} />} />
+      <Route path="/shops/:id" element={<ShopConnect shops={shops} />} />
       <Route path="/shops/:id/dashboard" element={<ShopDashboard shops={shops} setShops={setShops} posts={posts} fetchPosts={fetchPosts} fetchShops={fetchShops} storageItem={storageItem} setStorageItem={setStorageItem} />} />
       <Route path="/shops/:id/dashboard/post-form/create" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops} />} />
       <Route path="/shops/:id/dashboard/post-form/:postId" element={<ShopForm shops={shops} fetchPosts={fetchPosts} fetchShops={fetchShops}/>} />
       <Route path="/shops/:id/dashboard/bookings" element={<ShopBookings shops={shops} posts={posts} />} />
-      <Route path="/shops/:id/dashboard/edit-shop" element={<ShopEdit shops={shops} posts={posts} fetchShops={fetchShops} />} />
+      <Route path="/shops/:id/dashboard/edit-shop" element={<ShopEdit shops={shops} fetchShops={fetchShops} />} />
       <Route path="/favorites" element={<Favorites />} />
     </Routes>
   );
