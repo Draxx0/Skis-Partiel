@@ -10,6 +10,9 @@ import shopService from "./setup/services/shop.services";
 function App() {
   const [posts, setPosts] = useState([]);
   const [shops, setShops] = useState([]);
+  const [storageItem, setStorageItem] = useState(() =>
+  JSON.parse(localStorage.getItem("favoritesPost") || "[]")
+);
   const fetchPosts = async () => {
     try {
       const response = await postService.findAll();
@@ -26,6 +29,7 @@ function App() {
       console.log(error);
     }
   };
+  console.log(shops);
   useEffect(() => {
     fetchPosts();
     fetchShops();
@@ -40,6 +44,8 @@ function App() {
           setShops={setShops}
           fetchPosts={fetchPosts}
           fetchShops={fetchShops}
+          storageItem={storageItem}
+          setStorageItem={setStorageItem}
         />
       </MainLayout>
     </BrowserRouter>

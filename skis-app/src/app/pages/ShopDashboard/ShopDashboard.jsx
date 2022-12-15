@@ -3,12 +3,29 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import postService from "../../../setup/services/post.services";
 
-const ShopDashboard = ({ shops, fetchPosts, fetchShops }) => {
+const ShopDashboard = ({
+  shops,
+  fetchPosts,
+  fetchShops,
+  posts,
+  storageItem,
+  setStorageItem,
+}) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentShop, setCurrentShop] = useState({});
-
   const handleDeletePost = async (postId) => {
+    // JE NE RENTRE PAS DANS MON IF CERTAINEMENT PARCE QUE LE TRY SE JOUE AVANT PAR CONSEQUENT JE PERD MON POST ( Je n'ai pas trouvé comment réglé se soucis )
+    // const currentPost = posts.find((post) => post._id === postId);
+    // if (storageItem.includes(currentPost)) {
+    //   console.log("ok");
+    //   const otherStorageItem = storageItem.filter(
+    //     (item) => item._id !== currentPost._id
+    //   );
+    //   console.log(otherStorageItem);
+    //   setStorageItem(otherStorageItem);
+    //   localStorage.setItem("favoritesPost", JSON.stringify(otherStorageItem));
+    // }
     try {
       await postService.deleteOne(postId);
       toast.success("Post supprimé avec succès");
@@ -46,6 +63,12 @@ const ShopDashboard = ({ shops, fetchPosts, fetchShops }) => {
           </h1>
         </div>
         <div className="flex gap-2">
+          <Link
+            to={`/shops/${id}/dashboard/edit-shop`}
+            className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"
+          >
+            Modifié Boutique
+          </Link>
           <Link
             to={`/shops/${id}/dashboard/bookings`}
             className="bg-indigo-500 cursor-pointer hover:bg-indigo-700 text-white font-bold py-2 px-4 border-indigo-500 rounded transition-all duration-700 w-fit"

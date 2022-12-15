@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../../assets/images/logo.png";
+import Logo from "../../assets/images/logo.svg";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -29,6 +29,14 @@ const Navbar = () => {
             className="text-white font-bold transition duration-750 ease-in-out hover:text-indigo-500"
           >
             Boutiques
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/favorites"
+            className="text-white font-bold transition duration-750 ease-in-out hover:text-indigo-500"
+          >
+            Mes Favoris
           </Link>
         </li>
       </ul>

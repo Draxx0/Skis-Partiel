@@ -3,12 +3,23 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import commentService from "../../../setup/services/comment.services.js";
 import bookingService from "../../../setup/services/booking.services.js";
+import HeartSolid from "../../assets/images/heart-solid.svg";
+import HeartFill from "../../assets/images/heart-fill.svg";
 
-const PostDetails = ({ posts, shops, fetchPosts }) => {
+const PostDetails = ({
+  posts,
+  shops,
+  fetchPosts,
+  favoritesPost,
+  setFavoritesPost,
+  storageItem,
+  setStorageItem
+}) => {
   const [currentPost, setCurrentPost] = useState({});
   const [currentShop, setCurrentShop] = useState([]);
   const [comments, setComments] = useState([]);
   const [commentData, setCommentData] = useState({});
+  const [favorites, setFavorites] = useState([]);
   const [telData, setTelData] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
@@ -85,6 +96,27 @@ const PostDetails = ({ posts, shops, fetchPosts }) => {
       toast.error("Ce bien n'est plus disponible");
     }
   };
+
+  console.log("STORAGE ITEM", storageItem);
+
+  const handleFavorite = (currentPost) => {
+    if (storageItem.length === 0) {
+      localStorage.setItem("favoritesPost", JSON.stringify([favorites]));
+    }
+    if (storageItem.includes(currentPost) === false) {
+      const newStorageItem = [...storageItem, currentPost];
+      setStorageItem(newStorageItem);
+      localStorage.setItem("favoritesPost", JSON.stringify(newStorageItem));
+    } else {
+      const removeCurrentPost = storageItem.filter(
+        (post) => post._id !== currentPost._id
+      );
+      setStorageItem(removeCurrentPost);
+      localStorage.setItem("favoritesPost", JSON.stringify(removeCurrentPost));
+    }
+  };
+
+  // console.log("", localStorage.getItem("favoritesPost"));
 
   const getCurrentPost = async () => {
     const currentPost = await posts.find((post) => post._id === id);
@@ -187,11 +219,20 @@ const PostDetails = ({ posts, shops, fetchPosts }) => {
             alt="skis"
             className="h-96 object-cover border-2 border-indigo-500 rounded hover:brightness-90 transition-all duration-500"
           />
-          <span className="text-xl font-bold">
-            {comments.length > 0
-              ? averageStarsCalcul(comments).toFixed(1) + "🌟"
-              : "Non notée"}
-          </span>
+          <div className="flex justify-between items-center">
+            <span className="text-xl font-bold">
+              {comments.length > 0
+                ? averageStarsCalcul(comments).toFixed(1) + "🌟"
+                : "Non notée"}
+            </span>
+
+            <img
+              src={storageItem.includes(currentPost) ? HeartFill : HeartSolid} // Je ne comprends pas pourquoi ça ne fonctionne pas quand j'arrive sur la page détails et que j'ai ajouté le post en favoris, j'ai log mon storageitem et il include bien mon current post pourtant le coeur n'est pas plein.
+              alt="favorite icon"
+              className="h-8 w-8 cursor-pointer active:scale-90 transition-all duration-500"
+              onClick={() => handleFavorite(currentPost)}
+            />
+          </div>
           <div className="flex flex-col gap-2">
             <h2 className="text-3xl font-bold uppercase">
               {currentPost.title} {currentPost.price}€ / j - {currentPost.size}

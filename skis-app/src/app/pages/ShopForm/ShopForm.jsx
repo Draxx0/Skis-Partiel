@@ -81,6 +81,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               className="px-4 py-2"
               placeholder="Titre du Poste"
               onChange={handleChange}
+              defaultValue={credentials.title || ""}
             />
           </div>
 
@@ -93,6 +94,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               className="px-4 py-2"
               placeholder="https://masuperbeimage.jpg"
               onChange={handleChange}
+              defaultValue={credentials.imgUrl || ""}
             />
           </div>
 
@@ -105,6 +107,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               className="px-4 py-2"
               placeholder="45kg"
               onChange={handleChange}
+              defaultValue={credentials.weight || ""}
             />
           </div>
 
@@ -162,6 +165,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               className="px-4 py-2"
               placeholder="30"
               onChange={handleChange}
+              defaultValue={credentials.price || ""}
             />
           </div>
 
@@ -174,6 +178,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               className="px-4 py-2"
               placeholder="5 Avenue de la République"
               onChange={handleChange}
+              defaultValue={credentials.address || ""}
             />
           </div>
 
@@ -186,6 +191,7 @@ const ShopForm = ({ shops, fetchPosts, fetchShops }) => {
               rows="10"
               className="px-4 py-2 resize-none"
               onChange={handleChange}
+              defaultValue={credentials.description || ""}
             ></textarea>
           </div>
 

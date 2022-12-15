@@ -11,9 +11,14 @@ const remove = async (id) => {
   return await instance.delete(`${END_POINT}/${id}`);
 };
 
+const update = async (id, credentials) => {
+  return await instance.put(`${END_POINT}/${id}`, credentials);
+};
+
 const shopService = {
   findAll,
   remove,
+  update,
 };
 
 export default shopService;
